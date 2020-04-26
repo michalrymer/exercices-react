@@ -18,7 +18,7 @@ class ExchangeCounter extends React.Component {
       id: 1,
       name: "dollar",
       ratio: 4.21,
-      title: "Wartość w dolarach USA: "
+      title: "Wartość w $USD: "
     },
     {
       id: 2,
@@ -32,7 +32,6 @@ class ExchangeCounter extends React.Component {
       ratio: 5.18,
       title: "Wartość w Funtach: "
     }
-
   ]
 
   handleExchange = event => {

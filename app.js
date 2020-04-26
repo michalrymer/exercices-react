@@ -30,7 +30,7 @@ class ExchangeCounter extends React.Component {
       id: 3,
       name: "pound",
       ratio: 5.18,
-      title: "Wartość w Funtach: "
+      title: "Wartość w GBP: "
     }
   ]
 

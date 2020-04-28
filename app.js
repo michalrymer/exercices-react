@@ -10,7 +10,8 @@ const Cash = (props) => {
 class ExchangeCounter extends React.Component {
 
   state = {
-    amount: ""
+    amount: "",
+    product: "electricity"
   }
 
   currencies = [
@@ -18,7 +19,7 @@ class ExchangeCounter extends React.Component {
       id: 1,
       name: "dollar",
       ratio: 4.21,
-      title: "Wartość w $USD: "
+      title: "Wartość w USD: "
     },
     {
       id: 2,
@@ -39,9 +40,21 @@ class ExchangeCounter extends React.Component {
       amount: event.target.value
     })
   }
+  handleSelect = event => {
+    this.setState({
+      product: event.target.value
+    })
+  }
+  insertSuffix(select) {
+    if (select === "electricity") return <em>za kWh</em>
+    else if (select === "gas") return <em>za litr</em>
+    else if (select === "oranges") return <em>za kg</em>
+    else return null
+  }
+
   render() {
 
-    const { amount } = this.state;
+    const { amount, product } = this.state;
 
     const calculators = this.currencies.map(currency => (
       <Cash key={currency.id} ratio={currency.ratio} title={currency.title} cash={amount} />
@@ -49,10 +62,23 @@ class ExchangeCounter extends React.Component {
 
     return (
       <div className="app">
-        <label></label>
-        <input type="number"
-          value={this.state.amount}
-          onChange={this.handleExchange} />
+        <label>Wybierz produkt
+          <select value={product} onChange={this.handleSelect} >
+            <option value="electricity">prąd</option>
+            <option value="gas">benzyna</option>
+            <option value="oranges">pamarańcze</option>
+          </select>
+        </label>
+        <br />
+        <label>Wpisz wartość w PLN
+          <input
+            type="number"
+            value={this.state.amount}
+            onChange={this.handleExchange}
+          />
+          {this.insertSuffix(this.state.product)}
+
+        </label>
         {calculators}
       </div>
     )
